@@ -3,6 +3,7 @@ import mongoose from'mongoose';
 import dotenv from 'dotenv';
 import {test} from './controllers/user.controller.js'
 import userRoutes from './routes/user.route.js';
+import authRoutes from './routes/auth.route.js';
 const app = express();
 
 app.use(express.json());
@@ -12,9 +13,8 @@ mongoose.connect(
 ).then(() => console.log('MongoDB Connected...'))
  .catch(err => console.log(err));
 const PORT = process.env.PORT || 2000;
-app.listen(process.env.PORT, async() =>{
-    console.log(`Server is running on port:${PORT}`);
+app.listen(PORT, async() =>{
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
-
-app.get('/test',test)
 app.use('/api/user', userRoutes);
+app.use('/api/auth', authRoutes);
