@@ -31,7 +31,7 @@ const SignUp = () => {
       console.log(data);
       setLoading(false);
       if(response.ok){
-        return navigate('/signin');
+        return navigate('/sign-in');
       }
     }catch(err){
       setError(err.message);
