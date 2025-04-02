@@ -1,10 +1,15 @@
 import { useState } from 'react';
 import {Link, useNavigate} from 'react-router-dom'
 import {Spinner} from 'flowbite-react'
+import {useDispatch, useSelector} from 'react-redux';
+import { signInSuccess, signInFailure, signInStart } from '../redux/User/userSlice';
+
 const SignIn= () => {
   const [formData, setFormData] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  // const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState(null);
+  const {loading, error} = useSelector(state=>state.user);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleChange=(e)=>{
       setFormData({...formData, [e.target.id]:e.target.value.trim()})   
@@ -13,11 +18,12 @@ const SignIn= () => {
   const handleSubmit=async(e)=>{
     e.preventDefault();
     if(!formData.email || !formData.password){
-      return setError('Please fill all the fields and then try signing in');
+      return dispatch(signInFailure('Please fill all the fields and then try signing in'));
     }
     try{
-      setLoading(true);
-      setError(null);
+      // setLoading(true);
+      // setError(null);
+      dispatch(signInStart());
       const response = await fetch('/api/auth/signin', {
         method:'POST',
         headers:{'Content-Type':'application/json'},
@@ -25,17 +31,20 @@ const SignIn= () => {
       })
       const data = await response.json();
       if(data.success === false){
-        setLoading(false);
-        return setError(data.message);
+        // setLoading(false);
+        // return setError(data.message);
+        dispatch(signInFailure(data.message));
       }
       console.log(data);
-      setLoading(false);
+      // setLoading(false);
       if(response.ok){
+        dispatch(signInSuccess(data))
         return navigate('/');
       }
     }catch(err){
-      setError(err.message);
-      setLoading(false);
+      // setError(err.message);
+      // setLoading(false);
+      dispatch(signInFailure(err.message))
     }
   }
   return (
