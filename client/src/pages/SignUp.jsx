@@ -39,7 +39,7 @@ const SignUp = () => {
     }
   }
   return (
-    <div className="min-h-screen mt-20 p-6">
+    <div className="min-h-screen mt-25 p-6">
       <div className="flex max-w-6xl gap-5 mx-auto flex-col md:flex-row ">
         <div className="flex-1">
           {/*left*/}
@@ -49,12 +49,12 @@ const SignUp = () => {
             <p className="text-sm">
               {/* This blog is a space where ideas, insights, and innovation come together. Whether you're a tech enthusiast, developer, or just curious about the latest trends, you'll find valuable content on web development, MERN stack, JavaScript, and beyond.
               Stay updated with industry-standard practices, coding tutorials, and real-world project insights—all in one place. Let’s learn, build, and grow together! */}
-              Welcome to this demo blog application! You can sign up and log in using your email and password or simply with Google authentication for a seamless experience.
+              Welcome to this demo blog application! You can sign Up using your email and password or simply with Google authentication for a seamless experience.
               Explore the platform, interact with content, and experience how a modern MERN stack authentication system works in action. Enjoy your journey! 😊
               <br/>Let me know if you’d like any refinements! 🚀
             </p>
         </div>
-        <div className="flex-1 bg-slate-100 p-4 rounded-lg">
+        <div className="flex-1 bg-linear-to-r from-slate-200 to-slate-200 p-4 rounded-lg pb-10 shadow-xl">
           {/*right*/}
           <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
               <h1 className="text-4xl tracking-[1px] font-semibold my-4 ">Sign Up</h1>
@@ -64,7 +64,7 @@ const SignUp = () => {
                   type="text"
                   placeholder="Your username"
                   id="username"
-                  className="block w-full rounded-md border-1 border-gray-300 px-2 py-1.5"
+                  className="block w-full rounded-md border-1 text-sm border-gray-300 px-2 py-1.5 bg-white"
                   onChange={handleChange}
                 />
               </div>
@@ -72,9 +72,9 @@ const SignUp = () => {
                 <label htmlFor="email">Email</label>
                 <input
                     type="email"
-                    placeholder="Your email address"
+                    placeholder="user@gmail.com"
                     id="email"
-                    className="block w-full rounded-md border-1 border-gray-300 px-2 py-1.5"
+                    className="block text-sm w-full rounded-md border-1 border-gray-300 px-2 py-1.5 bg-white"
                     onChange={handleChange}
                   />
               </div>
@@ -82,19 +82,19 @@ const SignUp = () => {
               <label htmlFor="email">Password</label>
                 <input
                     type="password"
-                    placeholder="Your password"
+                    placeholder="************"
                     id="password"
-                    className="block w-full rounded-md border-1 border-gray-300 px-2 py-1.5"
+                    className="block text-sm w-full rounded-md border-1 border-gray-300 px-2 py-1.5 bg-white"
                     onChange={handleChange}
                   />
               </div>
-              <button className="bg-blue-400 hover:bg-blue-500 cursor-pointer py-2 rounded-lg uppercase text-white font-semibold tracking-[1px] " disabled={loading} type="submit">
+              <button className="bg-blue-400 hover:bg-blue-500 cursor-pointer py-2 rounded-lg mt-4 uppercase text-white font-semibold tracking-[1px] " disabled={loading} type="submit">
                 {loading ? 
                   (<Spinner aria-label="Alternate spinner button example" size="sm" />) 
                   : 'Sign Up'}
               </button>
           </form>
-          <div className='flex gap-3 text-sm mt-2'>
+          <div className='flex gap-3 text-sm mt-4'>
             <span>Have an account?</span>
             <Link to="/sign-in">
               <span className="text-blue-500 cursor-pointer hover:underline ">Sign In</span>
