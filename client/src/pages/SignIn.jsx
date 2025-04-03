@@ -3,6 +3,7 @@ import {Link, useNavigate} from 'react-router-dom'
 import {Spinner} from 'flowbite-react'
 import {useDispatch, useSelector} from 'react-redux';
 import { signInSuccess, signInFailure, signInStart } from '../redux/User/userSlice';
+import OAuth from '../components/OAuth';
 
 const SignIn= () => {
   const [formData, setFormData] = useState({});
@@ -95,6 +96,7 @@ const SignIn= () => {
                   (<Spinner aria-label="Alternate spinner button example" size="sm" />) 
                   : 'Sign In'}
               </button>
+              <OAuth/>
           </form>
           <div className='flex gap-3 text-sm mt-4'>
             <span>Do not have an account?</span>

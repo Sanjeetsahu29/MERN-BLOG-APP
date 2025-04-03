@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import {Link, useNavigate} from 'react-router-dom'
 import {Spinner} from 'flowbite-react'
+import OAuth from '../components/OAuth';
 const SignUp = () => {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
@@ -93,6 +94,7 @@ const SignUp = () => {
                   (<Spinner aria-label="Alternate spinner button example" size="sm" />) 
                   : 'Sign Up'}
               </button>
+              <OAuth/>
           </form>
           <div className='flex gap-3 text-sm mt-4'>
             <span>Have an account?</span>
