@@ -1,10 +1,18 @@
-import { Navbar, TextInput, Button, NavbarCollapse, NavbarLink, NavbarToggle } from "flowbite-react";
+import { Navbar, TextInput, Button, NavbarCollapse, NavbarLink, NavbarToggle, Avatar } from "flowbite-react";
 import {Link, useLocation} from 'react-router-dom'
 import { CiSearch } from "react-icons/ci";
 import { MdDarkMode } from "react-icons/md";
+import {useSelector} from 'react-redux'
+import { Dropdown, DropdownDivider, DropdownHeader, DropdownItem } from "flowbite-react";
+
+
+
 
 const Header = () => {
     const path = useLocation().pathname;
+    const {currentUser} = useSelector(state=>state.user);
+    
+    
   return (
     <Navbar className="border-b-2 border-gray-300">
         <Link to="/" className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white">
@@ -27,11 +35,36 @@ const Header = () => {
             <Button className="text-xl bg-gray-200 sm:inline hidden hover:bg-gray-300" pill>
                 <MdDarkMode className="text-black"/>
             </Button>
-            <Link to="/sign-in">
+            {currentUser ? (
+                <Dropdown
+                arrowIcon={false}
+                inline
+                label={
+                    <Avatar
+                        alt="user"
+                        img={currentUser.profilePicture}
+                        rounded
+                    />
+                }
+                
+                >
+                <DropdownHeader>
+                  <span className="block text-sm">@{currentUser.username}</span>
+                  <span className="block truncate text-sm font-medium">{currentUser.email}</span>
+                </DropdownHeader>
+                <Link to='/dashboard?tab=profile'>
+                    <DropdownItem>Profile</DropdownItem>
+                </Link>
+                <DropdownDivider />
+                <DropdownItem>Sign out</DropdownItem>
+              </Dropdown>
+            ):(
+                <Link to="/sign-in">
                 <Button  className="bg-gradient-to-r from-teal-200 to-lime-200 text-gray-900 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-lime-200 cursor-pointer">
                     Sign In
                 </Button>
             </Link>
+            )}
             <NavbarToggle/>
         </div>
         

@@ -29,7 +29,7 @@ export const signin = async (req, res, next)=>{
     try{
         const user = await User.findOne({email});
         if(!user){
-            return next(errorHandler(400, "Invalid ceredentials"));
+            return next(errorHandler(400, "Seem like you don't have an account"));
         }
         const isPasswordCorrect = bcryptjs.compareSync(password, user.password);
         if(!isPasswordCorrect){
@@ -49,7 +49,7 @@ export const signin = async (req, res, next)=>{
 }
 
 export const google = async (req, res, next)=>{
-    const {email, name, photoURL} = req.body;
+    const {email, name, googlePhotoUrl } = req.body;
     try{
         const user = await User.findOne({email});
         if(user){
@@ -67,7 +67,7 @@ export const google = async (req, res, next)=>{
                 username:name.toLowerCase().split(' ').join('') + Math.random().toString(9).slice(-4),
                 email,
                 password:hashedPassword,
-                profilePicture:photoURL
+                profilePicture:googlePhotoUrl 
             });
             await newUser.save();
             const token = jwt.sign({id:newUser._id},process.env.JWT_SECRET,{expiresIn:'1d'});
