@@ -34,11 +34,13 @@ const Header = () => {
                     arrowIcon={false}
                     inline
                     dismissOnClick={false}
+                    
                     label={
                         <Avatar
                             alt="user"
                             img={currentUser.profilePicture}
                             rounded
+                            className="cursor-pointer"
                         />
                     }
                 >
